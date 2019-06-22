@@ -26,4 +26,16 @@ class Question extends Model
         return $this->created_at->diffForHumans();  //คอลลัม created_at updated_at laravel จะมองสองตัวนี้เป็น Carbon object 
 
     }
+
+    public function getStatusAttribute()
+    {
+        if($this->answers > 0){
+            if($this->best_answer_is){
+                return "answered-accepted";
+            }
+            return "answered";
+        }else{
+            return "unanswered";
+        }
+    }
 }
